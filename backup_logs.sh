@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # Configuration
-LOG_DIR="/path/to/logs"  # Change this to your actual log directory
-BACKUP_DIR="/path/to/backup"  # Change this to your actual backup directory
+LOG_DIR="/c/Users/user/logs"
+BACKUP_DIR="/c/Users/user/backups"
+
 MAX_BACKUPS=5  # Maximum number of backups to keep
 
 # Create backup directory if it doesn't exist
