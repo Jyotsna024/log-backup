@@ -3,7 +3,7 @@
 # Configuration
 LOG_DIR="/c/Users/user/logs"
 BACKUP_DIR="/c/Users/user/backups"
-MAX_BACKUPS=5  # Maximum number of backups to keep
+MAX_BACKUPS=5  
 
 # Create backup directory if it doesn't exist
 mkdir -p "$BACKUP_DIR"
