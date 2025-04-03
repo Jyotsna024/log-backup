@@ -1,32 +1,16 @@
-#!/bin/bash
-
-# Configuration
-LOG_DIR="/c/Users/user/logs"
-BACKUP_DIR="/c/Users/user/backups"
-MAX_BACKUPS=5  
-
-# Create backup directory if it doesn't exist
-mkdir -p "$BACKUP_DIR"
-
-# Create a timestamp
-TIMESTAMP=$(date "+%Y-%m-%d_%H-%M-%S")
-
-# Archive logs (Fix for Windows Git Bash)
-tar -czf "$BACKUP_DIR/logs_$TIMESTAMP.tar.gz" -C "$(cygpath -u "$LOG_DIR")" .
-
-# Count the number of backup files
-BACKUP_COUNT=$(ls -1tr "$BACKUP_DIR"/logs_*.tar.gz 2>/dev/null | wc -l)
-
-# Remove old backups if exceeding MAX_BACKUPS
-if [ "$BACKUP_COUNT" -gt "$MAX_BACKUPS" ]; then
-    ls -1tr "$BACKUP_DIR"/logs_*.tar.gz | head -n -$MAX_BACKUPS | xargs rm -f
+log_file="log_file.log"
+bkup_dir="backup"
+timestamp=$(date +"%Y%m%d_%H%M%S")
+mkdir -p "$bkup_dir"
+echo "Good Morning" >> "$log_file"
+echo "Good Evening" >> "$log_file"
+if [ -f "$log_file" ]; then 
+  mv "$log_file" "$bkup_dir/Bkup_log_file_$timestamp.log"
+  echo "Backup successful: $bkup_dir/Bkup_log_file_$timestamp.log"
+else
+  echo "No log file found to back up."
 fi
-
-# Clear only log files in the log directory
-rm -f "$LOG_DIR"/*.log
-
-# Display confirmation message
-echo "Backup and log rotation completed successfully."
-
-# Show contents of backup directory
-ls -lh "$BACKUP_DIR"
+touch "$log_file"
+echo "New log file created: $log_file"
+ls -ltr "$bkup_dir"
+cat "$log_file"
